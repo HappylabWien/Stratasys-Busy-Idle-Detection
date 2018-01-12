@@ -2,14 +2,14 @@ require_relative 'driver_client'
 require 'net/ping'
 
 # printer settings
-host='192.168.1.32' # Elite
+# host='192.168.1.32' # Elite
 # host='192.168.1.31' # BST
+host=ARGV[0]
 port=53742
 
 # prepare pinging printer
 printerping = Net::Ping::TCP.new(host)
 
-while true do
   #TODO loop found entries
   begin
     # ping printer
@@ -26,10 +26,8 @@ while true do
     client.data_transferred
     client.closeConnection
   rescue
-    filedata="Off"
+    filedata="-modelerStatus {off}"
   end
 
   puts filedata
 
-  sleep 60 # TODO get from command line
-end
